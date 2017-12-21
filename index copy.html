@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+	<script src="main.js"></script>
+
+	<style>
+		.flex-item-1 {flex:1 1 0;}
+		.radius-0 {border-radius:0 !important; margin-bottom:0 !important;}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
+		<div class="container">
+
+			<a class="navbar-brand font-weight-bold" href="#">IST-Mart</a>
+
+			<form class="form-inline my-2 my-lg-0">
+
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+			</form>
+
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="jumbotron p-4">
+
+					<h2>Cart</h2>
+
+					<div>
+
+						<ul class="list-group" data-bind= "foreach: cart.items">
+							<li class="list-group-item d-flex justify-content-between">
+								<div data-bind="text: name"></div>
+							</li>
+						</ul>
+
+						<ul class="list-group d-flex flex-row mt-4">
+
+							<li class="list-group-item radius-0 flex-item-1">
+								<span data-bind="text: cart.numItems">0</span>
+								<span> items in cart</span>
+							</li>
+
+							<li class="list-group-item radius-0 flex-item-1">
+								<span class="font-weight-bold">Subtotal:</span>
+								<span data-bind="text: '$' + cart.total()">$0</span>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+
+				<h2>Products</h2>
+
+				<div class="row" data-bind="foreach: data">
+					<div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex p-2">
+
+						<div class="card">
+
+							<img data-bind="attr:{src: image}">
+
+							<img data-bind="attr: {src: image, alt:name" />
+
+							<div class="pl-3" data-bind="text: name"></div>
+
+							<div class="text-center mt-auto pt-2">
+
+								<span  class="badge badge-success" data-bind="text: '$' + price"></span>
+
+								<span class="text-danger" data-bind="text: sale + '% off', visible: sale > 0"></span>
+								
+							</div>
+
+							<button type="button" class="btn btn-success" data-bind="click: $parent.addToCart, text: addedToCart() ? 'In Cart' : 'Add To Cart', disable: addedToCart()">Add To Cart</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
